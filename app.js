@@ -6,6 +6,7 @@ const app = express();
 const session = require("express-session");
 const secretWordRouter = require("./routes/secretWord");
 const auth = require("./middleware/auth");
+const notesRouter = require("./routes/notes");
 const cookieParser = require("cookie-parser");
 const csrf = require("host-csrf");
 
@@ -65,6 +66,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 app.use("/sessions", require("./routes/sessionRoutes"));
+app.use("/notes", auth, notesRouter);
 app.use("/secretWord", auth, secretWordRouter);
 
 app.set("view engine", "ejs");
