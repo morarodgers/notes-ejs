@@ -1,0 +1,33 @@
+<%- include("partials/head.ejs") %> <%- include("partials/header.ejs") %>
+<h2>Notes List</h2>
+<table id="notes-table">
+  <tr id="notes-table-header">
+    <th>Title</th>
+    <th>Subject</th>
+    <th>Content</th>
+    <th colspan="2"></th>
+  </tr>
+  <% if (notes && notes.length) { %>
+    <% notes.forEach((note) => { %>
+      <tr>
+        <td><%= note.title %></td>
+        <td><%= note.subject %></td>
+        <td><%= note.content %></td>
+        <td><a href="/notes/edit/<%= note.id %>">
+            <button type="button" action="/note/update/<%= note.id %>">edit</button>
+          </a></td>
+        <td><form method="POST" action="/notes/delete/<%= note.id %>" style="display: inline">
+          <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+          <button type="submit">delete</button>
+        </form></td>
+      </tr>
+    <% }) %>
+  <% } %>
+</table>
+<br />
+<a href="/notes/new">
+    <button type="button">Add New Note</button>
+</a>
+<br />
+<br />
+<a href="/">Click here to return home.</a>

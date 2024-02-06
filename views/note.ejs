@@ -1,0 +1,25 @@
+<%- include("partials/head.ejs") %> <%- include("partials/header.ejs") %>
+
+<h1><%= note ? "Edit Note Entry" : "Add New Note Entry" %></h1>
+<form method="POST" action="<%= note ? '/notes/update/' + note.id : '/notes' %>" >
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+  <div>
+    <label for="title">Title:</label>
+    <input name="title" id="title" value="<%= note ? note.title : '' %>" />
+  </div>
+  <div>
+    <label for="subject">Subject:</label>
+    <input name="subject" id="subject" value="<%= note ? note.subject : '' %>"/>
+  </div>
+  <div>
+    <label for="content">Content:</label>
+    <input name="content" id="content" value="<%= note ? note.content : '' %>"/>
+  </div>
+  <div>
+    <button onClick="submit"><%= note ? "Edit Note" : "Add New Note" %></button>
+    <a href="/notes">
+      <button type="button">Cancel</button>
+    </a>
+  </div>
+</form>
+<%- include("partials/footer.ejs") %>

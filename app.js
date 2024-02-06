@@ -6,6 +6,7 @@ const app = express();
 const session = require("express-session");
 const secretWordRouter = require("./routes/secretWord");
 const auth = require("./middleware/auth");
+const notesRouter = require("./routes/notes");
 const cookieParser = require("cookie-parser");
 const csrf = require("host-csrf");
 
@@ -65,31 +66,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 app.use("/sessions", require("./routes/sessionRoutes"));
+app.use("/notes", auth, notesRouter);
 app.use("/secretWord", auth, secretWordRouter);
 
 app.set("view engine", "ejs");
-
-/*app.use(require("body-parser").urlencoded({ extended: true }));
-
-app.get("/secretWord", (req, res) => {
-  if (!req.session.secretWord) {
-    req.session.secretWord = "syzygy";
-  }
-  res.locals.info = req.flash("info");
-  res.locals.errors = req.flash("error");
-  res.render("secretWord", { secretWord: req.session.secretWord });
-});
-
-app.post("/secretWord", (req, res) => {
-  if (req.body.secretWord.toUpperCase()[0] == "P") {
-    req.flash("error", "That word won't work!");
-    req.flash("error", "You can't use words that start with p.");
-  } else {
-    req.session.secretWord = req.body.secretWord;
-    req.flash("info", "The secret word was changed.");
-  }
-  res.redirect("/secretWord");
-});*/
 
 app.use((req, res) => {
   res.status(404).send(`That page (${req.url}) was not found.`);
