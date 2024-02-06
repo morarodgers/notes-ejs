@@ -1,6 +1,6 @@
 <%- include("partials/head.ejs") %> <%- include("partials/header.ejs") %>
 
-<h1><%= job ? "Edit Note Entry" : "Add New Note Entry" %></h1>
+<h1><%= note ? "Edit Note Entry" : "Add New Note Entry" %></h1>
 <form method="POST" action="<%= note ? '/notes/update/' + note.id : '/notes' %>" >
   <input type="hidden" name="_csrf" value="<%= _csrf %>" />
   <div>

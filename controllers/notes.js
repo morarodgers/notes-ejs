@@ -59,10 +59,9 @@ const editNote = async (req, res) => {
   
   if (!note) {
     req.flash("error", `No note with id ${noteId} found.`)
+  } else {
+    req.flash("info", "The note has been successfully updated.")
   }
-  req.flash("info", "The note has been successfully updated.")
-
-  res.redirect('/notes');
 };
 
 const deleteNote = async (req, res) => {
