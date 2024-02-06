@@ -62,6 +62,7 @@ const editNote = async (req, res) => {
   } else {
     req.flash("info", "The note has been successfully updated.")
   }
+  res.redirect('/notes');
 };
 
 const deleteNote = async (req, res) => {
